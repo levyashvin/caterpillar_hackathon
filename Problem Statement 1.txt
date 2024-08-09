@@ -1,0 +1,83 @@
+﻿CODE-A-THON 2024 
+24-hour coding Challenge 
+Problem Statement 1 
+Develop a next gen capability for service technicians to record equipment inspections without having to manually  write/type. 
+» Functional, AI powered, CAT Inspect application.  
+» Presentation to highlight the key application functionalities. 
+» The MVP (minimal viable product) codebase. 
+Supporting details:  
+What is an Inspection? 
+Inspection is a key process to identify and record any issues observed with equipment. Such issues might include, for example, a broken  windshield, worn tires that need replacement, or oil colour that is too dark.  
+How do inspections help? 
+Timely inspection prevents unintended breakdown that can cause disruption to work & high servicing cost.  
+Expected Outcomes: 
+• Voice Enabled/Guided Inspection 
+• Prompt to capture specific information per given form. The prompts are derived from the questionnaire. • Voice Record inspection finding for each section of the form. 
+• Upon a specific word (Ex: OK/ Record), the next prompt to be played. 
+• On recognizing specific predefined words (Ex; Broken, High, Low, Rust, etc.), prompt for  
+• Capturing images of the specific part 
+• Record the concerned parameter value. 
+• Upon completing inspection, allow inspector to validate & enhance the report. 
+• Upon validation of the inspection report, allow storing the report for subsequent retrieval. 
+• UI for Listing & Viewing completed/in progress Inspections. Include specific report search capability based on report identifier. • Generate inspection report summary with the needed actions. 
+• Export Inspection Details to PDF. Images to be included in appropriate sections. 
+• Enable voice-based inspection in Multiple Languages (for ex. Hindi, English, etc)  
+Inspection Templates 
+HEADER 
+▪ Truck Serial Number – Example 7301234,730EJ73245,73592849, 735EJBC9723 
+▪ Truck Model – Example 730 ,730 EJ,735,745 
+▪ Inspection ID – Auto-incremented unique number 
+▪ Inspector Name 
+▪ Inspection Employee ID 
+▪ Date & Time of Inspection 
+▪ Location of Inspection 
+▪ Geo Coordinates of Inspection (optional, in case of remote location) 
+▪ Service Meter Hours (Odometer reading) 
+▪ Inspector Signature 
+▪ Customer Name /Company name  
+▪ CAT Customer ID
+
+
+1 
+1.TIRES 
+▪ Tire Pressure for Left Front 
+▪ Tire Pressure for Right Front 
+▪ Tire Condition for Left Front – (Good, Ok, Needs Replacement) 
+▪ Tire Condition for Right Front – (Good, Ok, Needs Replacement) 
+▪ Tire Pressure for Left Rear 
+▪ Tire Pressure for Right Rear 
+▪ Tire Condition for Left Rear – (Good, Ok, Needs Replacement) 
+▪ Tire Condition for Right Rear – (Good, Ok, Needs Replacement) 
+▪ Overall Tire Summary: (<1000 characters) 
+▪ Attached images of each tire in the same order. 
+2.BATTERY 
+▪ Battery Make : Example CAT,ABC, XYZ etc 
+▪ Battery replacement date: 
+▪ Battery Voltage – Example 12V / 13 V 
+▪ Battery Water level ( Good , Ok , Low ) 
+▪ Condition of Battery ( Any damage) Y/N. If yes attach image 
+▪ Any Leak / Rust in battery ( Y / N) 
+▪ Battery overall Summary: (<1000 characters) 
+▪ Attached images. 
+3.EXTERIOR 
+▪ Rust, Dent or Damage to Exterior: Y/N, If yes explain in notes and attach images ▪ Oil leak in Suspension (Y/N) 
+▪ Overall Summary (1000 Character Notes) 
+▪ Attached images. 
+4.BRAKES 
+▪ Brake Fluid level: (Good, Ok , Low )  
+▪ Brake Condition for Front – (Good, Ok, Needs Replacement) 
+▪ Brake Condition for Rear – (Good, Ok, Needs Replacement) 
+▪ Emergency Brake: ( Good , Ok , Low ) 
+▪ Brake Overall Summary (<1000 characters) 
+▪ Attached images. 
+5. ENGINE 
+▪ Rust, Dents or Damage in Engine: Y/N. If yes explain in notes and attach images. ▪ Engine Oil Condition - Good / Bad  
+▪ Engine Oil Color - Clean / Brown / Black etc 
+▪ Brake Fluid Condition - Good / Bad 
+▪ Brake Fluid Color: Clean / Brown / Black etc 
+▪ Any oil leak in Engine (Y/N) 
+▪ Overall Summary (<1000 characters) 
+▪ Attached images. 
+6. Voice of Customer 
+▪ Any feedback from Customer 
+▪ Images related to the issues discussed with customer.
