@@ -11,7 +11,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 1), () {
+    Timer(Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => LoginPage()),
       );
@@ -21,9 +21,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black, // Set the background color to black
       body: Center(
         child: Image.asset(
-            'assets/Caterpillar_logo.png'), // Add your logo image here
+          'assets/cat_white.png',
+          width: 200, // Specify the desired width
+          height: 100, // Specify the desired height
+          fit: BoxFit.contain, // Adjust this based on your requirement
+        ),
       ),
     );
   }

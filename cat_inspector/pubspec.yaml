@@ -41,5 +41,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/Caterpillar_logo.png
-    - assets/Caterpillar_white.png
+    - assets/cat_black.png
+    - assets/cat_white.png
+    - assets/truck_background.jpg
+    - assets/caterpillar_logo.png
+    - assets/caterpillar_logo.svg
