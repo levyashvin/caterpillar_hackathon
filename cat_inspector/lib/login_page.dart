@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'employee_login_page.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -28,7 +29,12 @@ class LoginPage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle sign-in
+                    // Navigate to EmployeeLoginPage
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EmployeeLoginPage()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
