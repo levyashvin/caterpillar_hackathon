@@ -43,6 +43,6 @@ flutter:
   assets:
     - assets/cat_black.png
     - assets/cat_white.png
-    - assets/truck_background.jpg
+    - assets/truck_background.png
     - assets/caterpillar_logo.png
-    - assets/caterpillar_logo.svg
+#   - assets/caterpillar_logo.svg

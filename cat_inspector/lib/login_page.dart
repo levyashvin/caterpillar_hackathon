@@ -9,21 +9,20 @@ class LoginPage extends StatelessWidget {
           // Background Image
           Positioned.fill(
             child: Image.asset(
-              'assets/truck_background.jpg',
-              fit: BoxFit.cover,
+              'assets/truck_background.png',
+              fit: BoxFit.cover, // Ensure the image scales to fit the screen
             ),
           ),
           // Overlay with Caterpillar logo and buttons
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Spacer(),
+              SizedBox(height: 100),
               Image.asset(
-                'assets/caterpillar_logo.svg',
+                'assets/caterpillar_logo.png',
                 width: 200,
                 height: 100,
               ),
-              SizedBox(height: 30),
+              Spacer(),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 20),
                 width: double.infinity,
@@ -76,7 +75,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Spacer(),
+              SizedBox(height: 40), // Add some space at the bottom
             ],
           ),
         ],
