@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'inspection_list_page.dart';
 
 class EmployeeLoginPage extends StatelessWidget {
   @override
@@ -17,7 +18,9 @@ class EmployeeLoginPage extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Spacer(),
+              SizedBox(
+                height: 100,
+              ),
               CircleAvatar(
                 radius: 50,
                 backgroundImage: AssetImage(
@@ -44,14 +47,6 @@ class EmployeeLoginPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none,
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
-                    ),
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                   ),
@@ -70,14 +65,6 @@ class EmployeeLoginPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none,
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
-                    ),
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                   ),
@@ -89,7 +76,12 @@ class EmployeeLoginPage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle login
+                    // Navigate to InspectionListPage
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => InspectionListPage()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
