@@ -1,39 +1,51 @@
 import 'package:flutter/material.dart';
-import 'employee_login_page.dart'; // Ensure this import is included
+import 'employee_login_page.dart';
 
-class InspectionListPage extends StatelessWidget {
+class InspectionListPage extends StatefulWidget {
+  @override
+  _InspectionListPageState createState() => _InspectionListPageState();
+}
+
+class _InspectionListPageState extends State<InspectionListPage> {
   final List<Map<String, String>> inspections = [
     {
       'vehicle': '424 Backhoe Loader',
       'location': 'Lucknow',
       'clientName': 'Aditya Avi',
-      'phone': '9336063710'
+      'phone': '9336063710',
+      'image': 'assets/424_backhoe_loader.png'
     },
     {
       'vehicle': '730 Articulated Trucks',
       'location': 'Trichy',
       'clientName': 'Yuva Yashvin',
-      'phone': '8778044994'
+      'phone': '8778044994',
+      'image': 'assets/730_articulated_trucks.png'
     },
     {
       'vehicle': 'CW34 Roller',
       'location': 'Delhi',
       'clientName': 'Yuvraj',
-      'phone': '9818378372'
+      'phone': '9818378372',
+      'image': 'assets/cw34_roller.png'
     },
     {
       'vehicle': '836 Landfill Compactor',
       'location': 'Bengaluru',
       'clientName': 'Chinamy',
-      'phone': '9563148521'
+      'phone': '9563148521',
+      'image': 'assets/836_landfill_compactor.png'
     },
     {
       'vehicle': '310 Mini Excavator',
       'location': 'Chennai',
       'clientName': 'Abiram',
-      'phone': '9564317975'
+      'phone': '9564317975',
+      'image': 'assets/310_mini_excavator.png'
     },
   ];
+
+  String searchQuery = "";
 
   @override
   Widget build(BuildContext context) {
@@ -61,47 +73,97 @@ class InspectionListPage extends StatelessWidget {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.all(10),
-        child: ListView.builder(
-          itemCount: inspections.length,
-          itemBuilder: (context, index) {
-            final inspection = inspections[index];
-            return Card(
-              color: Color(0xFFFFCD11),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              margin: EdgeInsets.symmetric(vertical: 10),
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Vehicle: ${inspection['vehicle']}',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      'Location: ${inspection['location']}',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      'Client Name: ${inspection['clientName']}',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      'Phone: ${inspection['phone']}',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
+        color: Colors.white, // Set the background color to white
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Search',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(
+                        color: Color(0xFFFFCD11)), // Caterpillar yellow border
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(
+                        color: Color(0xFFFFCD11)), // Caterpillar yellow border
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(
+                        color: Color(0xFFFFCD11)), // Caterpillar yellow border
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    searchQuery = value.toLowerCase();
+                  });
+                },
               ),
-            );
-          },
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: inspections.length,
+                itemBuilder: (context, index) {
+                  final inspection = inspections[index];
+                  if (inspection['vehicle']!
+                          .toLowerCase()
+                          .contains(searchQuery) ||
+                      inspection['location']!
+                          .toLowerCase()
+                          .contains(searchQuery) ||
+                      inspection['clientName']!
+                          .toLowerCase()
+                          .contains(searchQuery) ||
+                      inspection['phone']!.contains(searchQuery)) {
+                    return Card(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        side: BorderSide(color: Color(0xFFFFCD11), width: 2),
+                      ),
+                      margin:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: ListTile(
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              inspection['vehicle']!,
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                            ),
+                            SizedBox(height: 5),
+                            Text('Location: ${inspection['location']}',
+                                style: TextStyle(color: Colors.black)),
+                            Text('Client Name: ${inspection['clientName']}',
+                                style: TextStyle(color: Colors.black)),
+                            Text('Phone: ${inspection['phone']}',
+                                style: TextStyle(color: Colors.black)),
+                          ],
+                        ),
+                        trailing: Image.asset(
+                          inspection['image']!,
+                          width: 70, // Increased width
+                          height: 70, // Increased height
+                        ),
+                      ),
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
