@@ -11,10 +11,15 @@ dependencies:
   flutter:
     sdk: flutter
   collection: ^1.18.0
-  js: ^0.7.1
+  js: ^0.6.3
   material_color_utilities: ^0.11.1
   speech_to_text: ^6.6.0
   string_scanner: ^1.2.0
+  intl: ^0.17.0
+  location: ^4.2.0
+  signature: ^4.0.0
+  image_picker: ^0.8.4+4
+  google_ml_kit: ^0.6.0
 
   test_api: ^0.7.2
 

@@ -13,35 +13,35 @@ class _InspectionListPageState extends State<InspectionListPage> {
       'location': 'Lucknow',
       'clientName': 'Aditya Avi',
       'phone': '9336063710',
-      'image': 'assets/424_backhoe_loader.png'
+      'image': 'assets/424_backhoe_loader.jpg'
     },
     {
-      'vehicle': '730 Articulated Trucks',
+      'vehicle': '370 Articulated Trucks',
       'location': 'Trichy',
       'clientName': 'Yuva Yashvin',
       'phone': '8778044994',
-      'image': 'assets/730_articulated_trucks.png'
+      'image': 'assets/370_articulated_trucks.jpeg'
     },
     {
       'vehicle': 'CW34 Roller',
       'location': 'Delhi',
       'clientName': 'Yuvraj',
       'phone': '9818378372',
-      'image': 'assets/cw34_roller.png'
+      'image': 'assets/cw34_roller.jpeg'
     },
     {
       'vehicle': '836 Landfill Compactor',
       'location': 'Bengaluru',
       'clientName': 'Chinamy',
       'phone': '9563148521',
-      'image': 'assets/836_landfill_compactor.png'
+      'image': 'assets/836_landfill_compactor.jpeg'
     },
     {
       'vehicle': '310 Mini Excavator',
       'location': 'Chennai',
       'clientName': 'Abiram',
       'phone': '9564317975',
-      'image': 'assets/310_mini_excavator.png'
+      'image': 'assets/310_mini_excavator.jpeg'
     },
   ];
 
