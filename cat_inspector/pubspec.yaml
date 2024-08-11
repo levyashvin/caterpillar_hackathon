@@ -20,6 +20,7 @@ dependencies:
   signature: ^4.0.0
   image_picker: ^0.8.4+4
   flutter_tts: ^3.1.0
+  shared_preferences: ^2.0.13
 
   test_api: ^0.7.2
 

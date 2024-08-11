@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'inspection_categories_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TireInspectionPage extends StatefulWidget {
   @override
@@ -26,6 +26,12 @@ class _TireInspectionPageState extends State<TireInspectionPage> {
   String? _rightRearCondition;
 
   @override
+  void initState() {
+    super.initState();
+    _loadSavedData();
+  }
+
+  @override
   void dispose() {
     _flutterTts.stop();
     super.dispose();
@@ -33,6 +39,41 @@ class _TireInspectionPageState extends State<TireInspectionPage> {
 
   Future<void> _speak(String text) async {
     await _flutterTts.speak(text);
+  }
+
+  Future<void> _saveData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+        'leftFrontPressure', _leftFrontPressureController.text);
+    await prefs.setString(
+        'rightFrontPressure', _rightFrontPressureController.text);
+    await prefs.setString('leftRearPressure', _leftRearPressureController.text);
+    await prefs.setString(
+        'rightRearPressure', _rightRearPressureController.text);
+    await prefs.setString('overallSummary', _overallSummaryController.text);
+    await prefs.setString('leftFrontCondition', _leftFrontCondition ?? '');
+    await prefs.setString('rightFrontCondition', _rightFrontCondition ?? '');
+    await prefs.setString('leftRearCondition', _leftRearCondition ?? '');
+    await prefs.setString('rightRearCondition', _rightRearCondition ?? '');
+  }
+
+  Future<void> _loadSavedData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _leftFrontPressureController.text =
+          prefs.getString('leftFrontPressure') ?? '';
+      _rightFrontPressureController.text =
+          prefs.getString('rightFrontPressure') ?? '';
+      _leftRearPressureController.text =
+          prefs.getString('leftRearPressure') ?? '';
+      _rightRearPressureController.text =
+          prefs.getString('rightRearPressure') ?? '';
+      _overallSummaryController.text = prefs.getString('overallSummary') ?? '';
+      _leftFrontCondition = prefs.getString('leftFrontCondition');
+      _rightFrontCondition = prefs.getString('rightFrontCondition');
+      _leftRearCondition = prefs.getString('leftRearCondition');
+      _rightRearCondition = prefs.getString('rightRearCondition');
+    });
   }
 
   Widget _buildPressureField(String label, TextEditingController controller) {
@@ -86,7 +127,8 @@ class _TireInspectionPageState extends State<TireInspectionPage> {
     return ElevatedButton(
       onPressed: () {
         onChanged(value);
-        _speak(value);
+        _speak(label + ' ' + value);
+        _saveData();
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: condition == value ? Color(0xFFFFCD11) : Colors.white,
@@ -107,6 +149,7 @@ class _TireInspectionPageState extends State<TireInspectionPage> {
         controller: controller,
         maxLines: 4,
         onTap: () => _speak(label),
+        onChanged: (value) => _saveData(),
         decoration: InputDecoration(
           labelText: label,
           border: OutlineInputBorder(
