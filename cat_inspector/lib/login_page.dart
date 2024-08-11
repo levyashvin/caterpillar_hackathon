@@ -1,17 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 import 'employee_login_page.dart';
+import 'Auth.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.asset('assets/MiningTruck1.mp4')
+      ..initialize().then((_) {
+        setState(() {}); // Update the UI when the video is loaded
+        _controller.setLooping(true);
+        _controller.setVolume(0.0);// Loop the video
+        _controller.play(); // Play the video automatically
+      });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose(); // Dispose the controller when the widget is disposed
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Image
+          // Background Video
           Positioned.fill(
-            child: Image.asset(
-              'assets/truck_background.png',
-              fit: BoxFit.cover, // Ensure the image scales to fit the screen
+            child: _controller.value.isInitialized
+                ? VideoPlayer(_controller)
+                : Container(
+              color: Colors.black, // Display a black screen while loading
             ),
           ),
           // Overlay with Caterpillar logo and buttons
@@ -32,13 +60,12 @@ class LoginPage extends StatelessWidget {
                     // Navigate to EmployeeLoginPage
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => EmployeeLoginPage()),
+                      MaterialPageRoute(builder: (context) => AuthPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
-                        Color(0xFFFFCD11), // Caterpillar yellow color
+                    Color(0xFFFFCD11), // Caterpillar yellow color
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),

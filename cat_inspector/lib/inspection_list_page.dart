@@ -1,47 +1,68 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'employee_login_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class InspectionListPage extends StatefulWidget {
+
   @override
   _InspectionListPageState createState() => _InspectionListPageState();
 }
 
 class _InspectionListPageState extends State<InspectionListPage> {
+
+  void logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      if (context.mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage()),
+        );
+      }
+    } catch (e) {
+      // Handle sign-out error if any
+      print('Sign out error: $e');
+    }
+  }
   final List<Map<String, String>> inspections = [
     {
       'vehicle': '424 Backhoe Loader',
       'location': 'Lucknow',
       'clientName': 'Aditya Avi',
       'phone': '9336063710',
-      'image': 'assets/424_backhoe_loader.png'
+      'image': 'assets/424_backhoe_loader.jpg'
     },
     {
       'vehicle': '730 Articulated Trucks',
       'location': 'Trichy',
       'clientName': 'Yuva Yashvin',
       'phone': '8778044994',
-      'image': 'assets/730_articulated_trucks.png'
+      'image': 'assets/310_mini_excavator.jpeg'
     },
     {
       'vehicle': 'CW34 Roller',
       'location': 'Delhi',
       'clientName': 'Yuvraj',
       'phone': '9818378372',
-      'image': 'assets/cw34_roller.png'
+      'image': 'assets/cw34_roller.jpeg'
     },
     {
       'vehicle': '836 Landfill Compactor',
       'location': 'Bengaluru',
       'clientName': 'Chinamy',
       'phone': '9563148521',
-      'image': 'assets/836_landfill_compactor.png'
+      'image': 'assets/836_landfill_compactor.jpeg'
     },
     {
       'vehicle': '310 Mini Excavator',
       'location': 'Chennai',
       'clientName': 'Abiram',
       'phone': '9564317975',
-      'image': 'assets/310_mini_excavator.png'
+      'image': 'assets/310_mini_excavator.jpeg'
     },
   ];
 
@@ -59,12 +80,7 @@ class _InspectionListPageState extends State<InspectionListPage> {
         automaticallyImplyLeading: false, // Remove the back button
         actions: [
           TextButton(
-            onPressed: () {
-              // Handle sign out
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => EmployeeLoginPage()),
-              );
-            },
+            onPressed: logout,
             child: Text(
               'Sign Out',
               style: TextStyle(color: Colors.white),

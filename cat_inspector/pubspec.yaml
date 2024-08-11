@@ -4,7 +4,7 @@ description: "A new Flutter project."
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 
 dependencies:
@@ -21,6 +21,11 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  firebase_core: ^3.3.0
+  cloud_firestore: ^5.2.1
+  firebase_auth: 5.1.4
+  video_player: ^2.5.4
+
 
 dev_dependencies:
   flutter_test:
@@ -51,3 +56,4 @@ flutter:
     - assets/cw34_roller.jpeg
     - assets/836_landfill_compactor.jpeg
     - assets/310_mini_excavator.jpeg
+    - assets/MiningTruck1.mp4
