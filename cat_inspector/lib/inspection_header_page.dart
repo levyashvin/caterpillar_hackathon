@@ -4,6 +4,7 @@ import 'package:location/location.dart';
 import 'package:signature/signature.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'inspection_categories_page.dart'; // Import the new page
 
 class InspectionHeaderPage extends StatefulWidget {
   final String vehicle;
@@ -125,93 +126,106 @@ class _InspectionHeaderPageState extends State<InspectionHeaderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Inspection Details',
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-      ),
-      body: Container(
-        color: Colors.white, // Set the background to white
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              _buildTextField(_serialNumberController, 'Truck Serial Number',
-                  icon: Icons.camera_alt, onTap: _captureSerialNumber),
-              _buildTextField(_truckModelController, 'Truck Model'),
-              _buildTextField(_inspectionIdController, 'Inspection ID',
-                  readOnly: true),
-              _buildTextField(_inspectorNameController, 'Inspector Name',
-                  readOnly: true),
-              _buildTextField(_employeeIdController, 'Inspection Employee ID',
-                  readOnly: true),
-              _buildTextField(_dateTimeController, 'Date & Time of Inspection',
-                  readOnly: true),
-              _buildTextField(_locationController, 'Location of Inspection',
-                  icon: Icons.location_on, onTap: _getCurrentLocation),
-              _buildTextField(_serviceMeterHoursController,
-                  'Service Meter Hours (Odometer reading)'),
-              _buildTextField(
-                  _customerNameController, 'Customer Name / Company name'),
-              _buildTextField(_customerIdController, 'CAT Customer ID'),
-              SizedBox(height: 20),
-              Text('Inspector Signature'),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Color(0xFFFFCD11), width: 2),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Column(
-                  children: [
-                    Signature(
-                      controller: _signatureController,
-                      backgroundColor: Colors.white,
-                      height: 150,
-                      width: 300,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            pinned: true,
+            backgroundColor: Colors.white,
+            iconTheme: IconThemeData(color: Colors.black),
+            title: Text(
+              'Inspection Details',
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              color: Colors.white, // Set the background to white
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  _buildTextField(
+                      _serialNumberController, 'Truck Serial Number',
+                      icon: Icons.camera_alt, onTap: _captureSerialNumber),
+                  _buildTextField(_truckModelController, 'Truck Model'),
+                  _buildTextField(_inspectionIdController, 'Inspection ID',
+                      readOnly: true),
+                  _buildTextField(_inspectorNameController, 'Inspector Name',
+                      readOnly: true),
+                  _buildTextField(
+                      _employeeIdController, 'Inspection Employee ID',
+                      readOnly: true),
+                  _buildTextField(
+                      _dateTimeController, 'Date & Time of Inspection',
+                      readOnly: true),
+                  _buildTextField(_locationController, 'Location of Inspection',
+                      icon: Icons.location_on, onTap: _getCurrentLocation),
+                  _buildTextField(_serviceMeterHoursController,
+                      'Service Meter Hours (Odometer reading)'),
+                  _buildTextField(
+                      _customerNameController, 'Customer Name / Company name'),
+                  _buildTextField(_customerIdController, 'CAT Customer ID'),
+                  SizedBox(height: 20),
+                  Text('Inspector Signature'),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Color(0xFFFFCD11), width: 2),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                    child: Column(
                       children: [
-                        IconButton(
-                          icon: Icon(Icons.save, color: Colors.black),
-                          onPressed: _saveSignature,
+                        Signature(
+                          controller: _signatureController,
+                          backgroundColor: Colors.white,
+                          height: 150,
+                          width: 300,
                         ),
-                        IconButton(
-                          icon: Icon(Icons.clear, color: Colors.black),
-                          onPressed: _clearSignature,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.save, color: Colors.black),
+                              onPressed: _saveSignature,
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.clear, color: Colors.black),
+                              onPressed: _clearSignature,
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  _stopVoiceGuide();
-                  // Proceed to the next step
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  side: BorderSide(
-                      color: Color(0xFFFFCD11),
-                      width: 2), // Caterpillar yellow border
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
                   ),
-                ),
-                child: Text(
-                  'Start Inspection',
-                  style: TextStyle(color: Colors.black),
-                ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      _stopVoiceGuide();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                InspectionCategoriesPage()), // Navigate to the new page
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      side: BorderSide(
+                          color: Color(0xFFFFCD11),
+                          width: 2), // Caterpillar yellow border
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    child: Text(
+                      'Start Inspection',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
