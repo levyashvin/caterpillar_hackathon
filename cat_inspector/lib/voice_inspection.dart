@@ -40,7 +40,7 @@ class _VoiceInspectionState extends State<VoiceInspection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Voice Inspection')),
+      appBar: AppBar(title: const Text('Voice Inspection')),
       body: Center(child: Text(_text)),
       floatingActionButton: FloatingActionButton(
         onPressed: _listen,

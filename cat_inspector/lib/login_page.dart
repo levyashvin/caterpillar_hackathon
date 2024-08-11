@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'employee_login_page.dart';
 import 'Auth.dart';
 
 class LoginPage extends StatefulWidget {
@@ -23,33 +22,33 @@ class _LoginPageState extends State<LoginPage> {
           // Overlay with Caterpillar logo and buttons
           Column(
             children: [
-              SizedBox(height: 100),
+              const SizedBox(height: 100),
               Image.asset(
                 'assets/caterpillar_logo.png',
                 width: 200,
                 height: 100,
               ),
-              Spacer(),
+              const Spacer(),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
                     // Navigate to EmployeeLoginPage
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AuthPage()),
+                      MaterialPageRoute(builder: (context) => const AuthPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
-                        Color(0xFFFFCD11), // Caterpillar yellow color
+                        const Color(0xFFFFCD11), // Caterpillar yellow color
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15.0),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15.0),
                     child: Text(
                       'Sign In',
                       style: TextStyle(
@@ -60,9 +59,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 width: double.infinity,
                 child: OutlinedButton(
                   onPressed: () {
@@ -72,10 +71,11 @@ class _LoginPageState extends State<LoginPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    side: BorderSide(color: Colors.white), // Outline color
+                    side:
+                        const BorderSide(color: Colors.white), // Outline color
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15.0),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15.0),
                     child: Text(
                       'Create Account',
                       style: TextStyle(
@@ -86,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 40), // Add some space at the bottom
+              const SizedBox(height: 40), // Add some space at the bottom
             ],
           ),
         ],

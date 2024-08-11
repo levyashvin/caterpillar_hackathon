@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 import 'splash_screen.dart';
 import 'employee_login_page.dart';
 import 'inspection_list_page.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 import 'inspection_header_page.dart';
 import 'inspection_categories_page.dart';
-import 'tire_inspection_page.dart'; // Import the new page
+import 'tire_inspection_page.dart';
+import 'confirmation_page.dart'; // Import the new page
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+void main() {
   runApp(MyApp());
 }
 
@@ -26,7 +21,7 @@ class MyApp extends StatelessWidget {
       ),
       home: SplashScreen(),
       routes: {
-        // '/login': (context) => EmployeeLoginPage(context),
+        '/login': (context) => const EmployeeLoginPage(),
         '/inspections': (context) => InspectionListPage(),
         '/inspectionHeader': (context) => InspectionHeaderPage(
               vehicle: 'Example Vehicle',
@@ -34,9 +29,15 @@ class MyApp extends StatelessWidget {
               clientName: 'Example Client',
               phone: '123-456-7890',
             ),
-        '/inspectionCategories': (context) => InspectionCategoriesPage(),
-        '/tireInspection': (context) =>
-            TireInspectionPage(), // Add the new route
+        '/inspectionCategories': (context) => InspectionCategoriesPage(
+              inspectionDetails: {}, // Pass initial data if needed
+              tireImages: [], // Pass initial image list if needed
+            ),
+        '/tireInspection': (context) => TireInspectionPage(),
+        '/confirmation': (context) => ConfirmationPage(
+              details: {}, // Pass initial data if needed
+              images: [], // Pass initial image list if needed
+            ),
       },
     );
   }

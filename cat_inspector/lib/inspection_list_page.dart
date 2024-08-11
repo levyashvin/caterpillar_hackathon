@@ -1,6 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'employee_login_page.dart';
 import 'login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'inspection_header_page.dart';
@@ -72,7 +70,7 @@ class _InspectionListPageState extends State<InspectionListPage> {
       appBar: AppBar(
         automaticallyImplyLeading: false, // Remove the back button
         backgroundColor: Colors.white, // Set the app bar background to white
-        title: Text(
+        title: const Text(
           'Your Tasks',
           style: TextStyle(color: Colors.black), // Set the title color to black
         ),
@@ -87,7 +85,7 @@ class _InspectionListPageState extends State<InspectionListPage> {
                   borderRadius: BorderRadius.circular(10.0), // Rounded corners
                 ),
               ),
-              child: Text(
+              child: const Text(
                 'Sign Out',
                 style: TextStyle(color: Colors.white), // White text
               ),
@@ -106,14 +104,14 @@ class _InspectionListPageState extends State<InspectionListPage> {
                   filled: true,
                   fillColor: Colors.white,
                   labelText: 'Search',
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                         color: Color(0xFFFFCD11)), // Caterpillar yellow
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                         color: Color(0xFFFFCD11)), // Caterpillar yellow
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -162,15 +160,15 @@ class _InspectionListPageState extends State<InspectionListPage> {
     String image,
   ) {
     return Container(
-      margin: EdgeInsets.all(8.0),
+      margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         color: Colors.white,
-        border:
-            Border.all(color: Color(0xFFFFCD11)), // Caterpillar yellow border
+        border: Border.all(
+            color: const Color(0xFFFFCD11)), // Caterpillar yellow border
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: ListTile(
-        contentPadding: EdgeInsets.all(8.0),
+        contentPadding: const EdgeInsets.all(8.0),
         trailing:
             Image.asset(image, width: 50, height: 50), // Image on the right
         title: Text(vehicle),

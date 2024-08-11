@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
-import 'tire_inspection_page.dart'; // Import the new page
+import 'tire_inspection_page.dart'; // Add this import
+import 'confirmation_page.dart';
+import 'dart:io';
 
 class InspectionCategoriesPage extends StatelessWidget {
+  final Map<String, String> inspectionDetails;
+  final List<File> tireImages;
+
+  InspectionCategoriesPage(
+      {required this.inspectionDetails, required this.tireImages});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Inspection Categories',
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: Container(
         color: Colors.white,
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch, // Ensure full width
@@ -26,7 +34,7 @@ class InspectionCategoriesPage extends StatelessWidget {
             _buildCategoryButton(context, 'Brakes'),
             _buildCategoryButton(context, 'Engine'),
             _buildCategoryButton(context, 'Voice of Customer'),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildSubmitButton(context),
           ],
         ),
@@ -42,26 +50,24 @@ class InspectionCategoriesPage extends StatelessWidget {
           if (category == 'Tires') {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      TireInspectionPage()), // Navigate to the TireInspectionPage
+              MaterialPageRoute(builder: (context) => TireInspectionPage()),
             );
           }
           // Handle other categories similarly
         },
         style: TextButton.styleFrom(
           backgroundColor: Colors.white,
-          side: BorderSide(
+          side: const BorderSide(
               color: Color(0xFFFFCD11), width: 2), // Caterpillar yellow border
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
               vertical: 16.0), // Add padding for better appearance
         ),
         child: Text(
           category,
-          style: TextStyle(color: Colors.black, fontSize: 18),
+          style: const TextStyle(color: Colors.black, fontSize: 18),
         ),
       ),
     );
@@ -72,17 +78,25 @@ class InspectionCategoriesPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: ElevatedButton(
         onPressed: () {
-          // Handle submit action
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ConfirmationPage(
+                details: inspectionDetails,
+                images: tireImages,
+              ),
+            ),
+          );
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.black,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
               vertical: 16.0), // Add padding for better appearance
         ),
-        child: Text(
+        child: const Text(
           'Submit',
           style: TextStyle(color: Colors.white, fontSize: 18),
         ),

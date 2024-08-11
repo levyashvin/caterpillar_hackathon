@@ -119,13 +119,13 @@ class _TireInspectionPageState extends State<TireInspectionPage> {
         decoration: InputDecoration(
           labelText: label,
           border: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Color(0xFFFFCD11)), // Caterpillar yellow
+            borderSide: const BorderSide(
+                color: Color(0xFFFFCD11)), // Caterpillar yellow
             borderRadius: BorderRadius.circular(10.0),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Color(0xFFFFCD11)), // Caterpillar yellow
+            borderSide: const BorderSide(
+                color: Color(0xFFFFCD11)), // Caterpillar yellow
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
@@ -164,9 +164,10 @@ class _TireInspectionPageState extends State<TireInspectionPage> {
         _saveData();
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: condition == value ? Color(0xFFFFCD11) : Colors.white,
+        backgroundColor:
+            condition == value ? const Color(0xFFFFCD11) : Colors.white,
         foregroundColor: condition == value ? Colors.black : Colors.black,
-        side: BorderSide(color: Color(0xFFFFCD11)),
+        side: const BorderSide(color: Color(0xFFFFCD11)),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -186,13 +187,13 @@ class _TireInspectionPageState extends State<TireInspectionPage> {
         decoration: InputDecoration(
           labelText: label,
           border: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Color(0xFFFFCD11)), // Caterpillar yellow
+            borderSide: const BorderSide(
+                color: Color(0xFFFFCD11)), // Caterpillar yellow
             borderRadius: BorderRadius.circular(10.0),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Color(0xFFFFCD11)), // Caterpillar yellow
+            borderSide: const BorderSide(
+                color: Color(0xFFFFCD11)), // Caterpillar yellow
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
@@ -208,15 +209,15 @@ class _TireInspectionPageState extends State<TireInspectionPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label),
-          SizedBox(height: 8.0),
+          const SizedBox(height: 8.0),
           GestureDetector(
             onTap: () => _takePicture(tirePosition),
             child: Container(
               height: 150,
               width: double.infinity,
               decoration: BoxDecoration(
-                border:
-                    Border.all(color: Color(0xFFFFCD11)), // Caterpillar yellow
+                border: Border.all(
+                    color: const Color(0xFFFFCD11)), // Caterpillar yellow
                 borderRadius: BorderRadius.circular(10.0),
                 color: Colors.grey[200],
               ),
@@ -235,16 +236,16 @@ class _TireInspectionPageState extends State<TireInspectionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Tire Inspection',
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: Container(
         color: Colors.white,
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -294,23 +295,23 @@ class _TireInspectionPageState extends State<TireInspectionPage> {
               }),
               _buildSummaryField(
                   'Overall Tire Summary', _overallSummaryController),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
-                  side: BorderSide(
+                  side: const BorderSide(
                       color: Color(0xFFFFCD11),
                       width: 2), // Caterpillar yellow border
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                       vertical: 16.0), // Add padding for better appearance
                 ),
-                child: Text(
+                child: const Text(
                   'Continue',
                   style: TextStyle(color: Colors.black, fontSize: 18),
                 ),

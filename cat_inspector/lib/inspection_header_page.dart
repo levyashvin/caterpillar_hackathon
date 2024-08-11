@@ -4,7 +4,7 @@ import 'package:location/location.dart';
 import 'package:signature/signature.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'inspection_categories_page.dart'; // Import the new page
+import 'inspection_categories_page.dart';
 
 class InspectionHeaderPage extends StatefulWidget {
   final String vehicle;
@@ -59,7 +59,7 @@ class _InspectionHeaderPageState extends State<InspectionHeaderPage> {
     _employeeIdController.text =
         "EMP12345"; // Example: Replace with actual employee ID
     _dateTimeController.text =
-        DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
+        DateFormat('yyyy-MM-dd - kk:mm').format(DateTime.now());
     _inspectionIdController.text = DateTime.now()
         .millisecondsSinceEpoch
         .toString(); // Example auto-incremented ID
@@ -128,7 +128,7 @@ class _InspectionHeaderPageState extends State<InspectionHeaderPage> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
+          const SliverAppBar(
             pinned: true,
             backgroundColor: Colors.white,
             iconTheme: IconThemeData(color: Colors.black),
@@ -140,7 +140,7 @@ class _InspectionHeaderPageState extends State<InspectionHeaderPage> {
           SliverToBoxAdapter(
             child: Container(
               color: Colors.white, // Set the background to white
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
                   _buildTextField(
@@ -164,12 +164,13 @@ class _InspectionHeaderPageState extends State<InspectionHeaderPage> {
                   _buildTextField(
                       _customerNameController, 'Customer Name / Company name'),
                   _buildTextField(_customerIdController, 'CAT Customer ID'),
-                  SizedBox(height: 20),
-                  Text('Inspector Signature'),
+                  const SizedBox(height: 20),
+                  const Text('Inspector Signature'),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      border: Border.all(color: Color(0xFFFFCD11), width: 2),
+                      border:
+                          Border.all(color: const Color(0xFFFFCD11), width: 2),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Column(
@@ -184,11 +185,12 @@ class _InspectionHeaderPageState extends State<InspectionHeaderPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             IconButton(
-                              icon: Icon(Icons.save, color: Colors.black),
+                              icon: const Icon(Icons.save, color: Colors.black),
                               onPressed: _saveSignature,
                             ),
                             IconButton(
-                              icon: Icon(Icons.clear, color: Colors.black),
+                              icon:
+                                  const Icon(Icons.clear, color: Colors.black),
                               onPressed: _clearSignature,
                             ),
                           ],
@@ -196,27 +198,50 @@ class _InspectionHeaderPageState extends State<InspectionHeaderPage> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
                       _stopVoiceGuide();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                InspectionCategoriesPage()), // Navigate to the new page
+                          builder: (context) => InspectionCategoriesPage(
+                            inspectionDetails: {
+                              'Vehicle': widget.vehicle,
+                              'Location': widget.location,
+                              'Client Name': widget.clientName,
+                              'Phone': widget.phone,
+                              'Truck Serial Number':
+                                  _serialNumberController.text,
+                              'Truck Model': _truckModelController.text,
+                              'Inspection ID': _inspectionIdController.text,
+                              'Inspector Name': _inspectorNameController.text,
+                              'Inspection Employee ID':
+                                  _employeeIdController.text,
+                              'Date & Time of Inspection':
+                                  _dateTimeController.text,
+                              'Location of Inspection':
+                                  _locationController.text,
+                              'Service Meter Hours':
+                                  _serviceMeterHoursController.text,
+                              'Customer Name': _customerNameController.text,
+                              'CAT Customer ID': _customerIdController.text,
+                            },
+                            tireImages: [], // Pass initial image list if needed
+                          ),
+                        ),
                       );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      side: BorderSide(
+                      side: const BorderSide(
                           color: Color(0xFFFFCD11),
                           width: 2), // Caterpillar yellow border
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Start Inspection',
                       style: TextStyle(color: Colors.black),
                     ),
@@ -245,13 +270,13 @@ class _InspectionHeaderPageState extends State<InspectionHeaderPage> {
               ? IconButton(icon: Icon(icon), onPressed: onTap)
               : null,
           border: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Color(0xFFFFCD11)), // Caterpillar yellow
+            borderSide: const BorderSide(
+                color: Color(0xFFFFCD11)), // Caterpillar yellow
             borderRadius: BorderRadius.circular(10.0),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Color(0xFFFFCD11)), // Caterpillar yellow
+            borderSide: const BorderSide(
+                color: Color(0xFFFFCD11)), // Caterpillar yellow
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
