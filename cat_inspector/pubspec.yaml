@@ -11,10 +11,16 @@ dependencies:
   flutter:
     sdk: flutter
   collection: ^1.18.0
-  js: ^0.7.1
+  js: ^0.6.3
   material_color_utilities: ^0.11.1
   speech_to_text: ^6.6.0
   string_scanner: ^1.2.0
+  intl: ^0.17.0
+  location: ^4.4.0
+  signature: ^4.0.0
+  image_picker: ^0.8.4+4
+  flutter_tts: ^3.1.0
+  shared_preferences: ^2.0.13
 
   test_api: ^0.7.2
 
@@ -50,10 +56,11 @@ flutter:
     - assets/cat_white.png
     - assets/truck_background.png
     - assets/caterpillar_logo.png
-#   - assets/caterpillar_logo.svg
-    - assets/424_backhoe_loader.jpg
-    - assets/370_articulated_trucks.jpeg
-    - assets/cw34_roller.jpeg
-    - assets/836_landfill_compactor.jpeg
-    - assets/310_mini_excavator.jpeg
     - assets/MiningTruck1.mp4
+=======
+    - assets/424 Backhoe Loader.png
+    - assets/370 Articulated Truck.png
+    - assets/CW34 Roller.png
+    - assets/836 Landfill Compactor.png
+    - assets/310 Mini Excavator.png
+

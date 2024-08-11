@@ -67,120 +67,127 @@ class _InspectionListPageState extends State<InspectionListPage> {
   ];
 
   String searchQuery = "";
+import 'inspection_header_page.dart';
 
+class InspectionListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        automaticallyImplyLeading: false, // Remove the back button
+        backgroundColor: Colors.white, // Set the app bar background to white
         title: Text(
           'Your Tasks',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black), // Set the title color to black
         ),
-        automaticallyImplyLeading: false, // Remove the back button
         actions: [
           TextButton(
             onPressed: logout,
             child: Text(
               'Sign Out',
               style: TextStyle(color: Colors.white),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                // Handle sign out
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black, // Black background
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0), // Rounded corners
+                ),
+              ),
+              child: Text(
+                'Sign Out',
+                style: TextStyle(color: Colors.white), // White text
+              ),
             ),
           ),
         ],
       ),
       body: Container(
-        color: Colors.white, // Set the background color to white
+        color: Colors.white, // Set the background to white
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(8.0),
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: 'Search',
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                        color: Color(0xFFFFCD11)), // Caterpillar yellow border
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                        color: Color(0xFFFFCD11)), // Caterpillar yellow border
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                        color: Color(0xFFFFCD11)), // Caterpillar yellow border
-                  ),
                   filled: true,
                   fillColor: Colors.white,
+                  labelText: 'Search',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color(0xFFFFCD11)), // Caterpillar yellow
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color(0xFFFFCD11)), // Caterpillar yellow
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
                 ),
-                onChanged: (value) {
-                  setState(() {
-                    searchQuery = value.toLowerCase();
-                  });
-                },
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: inspections.length,
-                itemBuilder: (context, index) {
-                  final inspection = inspections[index];
-                  if (inspection['vehicle']!
-                          .toLowerCase()
-                          .contains(searchQuery) ||
-                      inspection['location']!
-                          .toLowerCase()
-                          .contains(searchQuery) ||
-                      inspection['clientName']!
-                          .toLowerCase()
-                          .contains(searchQuery) ||
-                      inspection['phone']!.contains(searchQuery)) {
-                    return Card(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        side: BorderSide(color: Color(0xFFFFCD11), width: 2),
-                      ),
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      child: ListTile(
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              inspection['vehicle']!,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                            ),
-                            SizedBox(height: 5),
-                            Text('Location: ${inspection['location']}',
-                                style: TextStyle(color: Colors.black)),
-                            Text('Client Name: ${inspection['clientName']}',
-                                style: TextStyle(color: Colors.black)),
-                            Text('Phone: ${inspection['phone']}',
-                                style: TextStyle(color: Colors.black)),
-                          ],
-                        ),
-                        trailing: Image.asset(
-                          inspection['image']!,
-                          width: 70, // Increased width
-                          height: 70, // Increased height
-                        ),
-                      ),
-                    );
-                  } else {
-                    return Container();
-                  }
-                },
+              child: ListView(
+                children: [
+                  _buildInspectionContainer(
+                      context, '424 Backhoe Loader', 'Pune', '123-456-7890'),
+                  _buildInspectionContainer(context, '370 Articulated Truck',
+                      'Mumbai', '234-567-8901'),
+                  _buildInspectionContainer(
+                      context, 'CW34 Roller', 'Delhi', '345-678-9012'),
+                  _buildInspectionContainer(context, '836 Landfill Compactor',
+                      'Chennai', '456-789-0123'),
+                  _buildInspectionContainer(context, '310 Mini Excavator',
+                      'Bangalore', '567-890-1234'),
+                ],
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildInspectionContainer(
+      BuildContext context, String vehicle, String location, String phone) {
+    return Container(
+      margin: EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border:
+            Border.all(color: Color(0xFFFFCD11)), // Caterpillar yellow border
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: ListTile(
+        contentPadding: EdgeInsets.all(8.0),
+        trailing: Image.asset('assets/$vehicle.png',
+            width: 50, height: 50), // Image on the right
+        title: Text(vehicle),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Location: $location'),
+            Text('Client Phone: $phone'),
+          ],
+        ),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => InspectionHeaderPage(
+                vehicle: vehicle,
+                location: location,
+                clientName: 'Client Name', // Replace with actual client name
+                phone: phone,
+              ),
+            ),
+          );
+        },
       ),
     );
   }
