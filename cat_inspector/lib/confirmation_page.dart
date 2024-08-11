@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:printing/printing.dart';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ConfirmationPage extends StatelessWidget {
@@ -10,47 +8,41 @@ class ConfirmationPage extends StatelessWidget {
 
   ConfirmationPage({required this.details, required this.images});
 
-  Future<void> _generatePdf() async {
-    final pdf = pw.Document();
-    final tempDir = await getTemporaryDirectory();
-    final file = File('${tempDir.path}/report.pdf');
+  Future<void> _generateCsv(BuildContext context) async {
+    // Create the CSV data
+    List<String> rows = ["Field,Value"];
 
-    pdf.addPage(
-      pw.Page(
-        build: (pw.Context context) => pw.Column(
-          children: [
-            pw.Text('Inspection Report',
-                style: const pw.TextStyle(fontSize: 24)),
-            pw.SizedBox(height: 20),
-            pw.Text('Details:', style: const pw.TextStyle(fontSize: 18)),
-            pw.SizedBox(height: 10),
-            ...details.entries
-                .map((entry) => pw.Text('${entry.key}: ${entry.value}')),
-            pw.SizedBox(height: 20),
-            pw.Text('Images:', style: const pw.TextStyle(fontSize: 18)),
-            pw.SizedBox(height: 10),
-            ...images.map(
-                (image) => pw.Image(pw.MemoryImage(image.readAsBytesSync()))),
-          ],
-        ),
-      ),
-    );
+    // Add the details
+    details.forEach((key, value) {
+      rows.add('$key,$value');
+    });
 
-    await file.writeAsBytes(await pdf.save());
-    await Printing.sharePdf(
-        bytes: await file.readAsBytes(), filename: 'report.pdf');
+    // Combine all rows into a single string
+    String csvData = rows.join('\n');
+
+    // Get the directory to save the CSV
+    final directory = await getApplicationDocumentsDirectory();
+    final path = "${directory.path}/inspection_report.csv";
+
+    // Save the CSV file
+    final file = File(path);
+    await file.writeAsString(csvData);
+
+    // Notify the user
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text("Report saved at $path")));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Confirm Details'),
+        title: Text('Confirm Details'),
       ),
       body: Center(
         child: ElevatedButton(
-          onPressed: _generatePdf,
-          child: const Text('Confirm and Generate Report'),
+          onPressed: () => _generateCsv(context),
+          child: Text('Confirm and Generate Report'),
         ),
       ),
     );
