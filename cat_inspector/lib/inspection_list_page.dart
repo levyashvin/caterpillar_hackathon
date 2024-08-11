@@ -1,33 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'employee_login_page.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'inspection_header_page.dart';
 
 class InspectionListPage extends StatefulWidget {
-
   @override
   _InspectionListPageState createState() => _InspectionListPageState();
 }
 
 class _InspectionListPageState extends State<InspectionListPage> {
-
-  void logout() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      if (context.mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => LoginPage()),
-        );
-      }
-    } catch (e) {
-      // Handle sign-out error if any
-      print('Sign out error: $e');
-    }
-  }
   final List<Map<String, String>> inspections = [
     {
       'vehicle': '424 Backhoe Loader',
@@ -67,9 +50,22 @@ class _InspectionListPageState extends State<InspectionListPage> {
   ];
 
   String searchQuery = "";
-import 'inspection_header_page.dart';
 
-class InspectionListPage extends StatelessWidget {
+  void logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      if (context.mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage()),
+        );
+      }
+    } catch (e) {
+      // Handle sign-out error if any
+      print('Sign out error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,17 +77,10 @@ class InspectionListPage extends StatelessWidget {
           style: TextStyle(color: Colors.black), // Set the title color to black
         ),
         actions: [
-          TextButton(
-            onPressed: logout,
-            child: Text(
-              'Sign Out',
-              style: TextStyle(color: Colors.white),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
-              onPressed: () {
-                // Handle sign out
-              },
+              onPressed: logout,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black, // Black background
                 shape: RoundedRectangleBorder(
@@ -129,22 +118,33 @@ class InspectionListPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    searchQuery = value.toLowerCase();
+                  });
+                },
               ),
             ),
             Expanded(
-              child: ListView(
-                children: [
-                  _buildInspectionContainer(
-                      context, '424 Backhoe Loader', 'Pune', '123-456-7890'),
-                  _buildInspectionContainer(context, '370 Articulated Truck',
-                      'Mumbai', '234-567-8901'),
-                  _buildInspectionContainer(
-                      context, 'CW34 Roller', 'Delhi', '345-678-9012'),
-                  _buildInspectionContainer(context, '836 Landfill Compactor',
-                      'Chennai', '456-789-0123'),
-                  _buildInspectionContainer(context, '310 Mini Excavator',
-                      'Bangalore', '567-890-1234'),
-                ],
+              child: ListView.builder(
+                itemCount: inspections.length,
+                itemBuilder: (context, index) {
+                  final inspection = inspections[index];
+                  if (searchQuery.isNotEmpty &&
+                      !inspection['vehicle']!
+                          .toLowerCase()
+                          .contains(searchQuery)) {
+                    return Container();
+                  }
+                  return _buildInspectionContainer(
+                    context,
+                    inspection['vehicle']!,
+                    inspection['location']!,
+                    inspection['clientName']!,
+                    inspection['phone']!,
+                    inspection['image']!,
+                  );
+                },
               ),
             ),
           ],
@@ -154,7 +154,13 @@ class InspectionListPage extends StatelessWidget {
   }
 
   Widget _buildInspectionContainer(
-      BuildContext context, String vehicle, String location, String phone) {
+    BuildContext context,
+    String vehicle,
+    String location,
+    String clientName,
+    String phone,
+    String image,
+  ) {
     return Container(
       margin: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
@@ -165,8 +171,8 @@ class InspectionListPage extends StatelessWidget {
       ),
       child: ListTile(
         contentPadding: EdgeInsets.all(8.0),
-        trailing: Image.asset('assets/$vehicle.png',
-            width: 50, height: 50), // Image on the right
+        trailing:
+            Image.asset(image, width: 50, height: 50), // Image on the right
         title: Text(vehicle),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -182,7 +188,7 @@ class InspectionListPage extends StatelessWidget {
               builder: (context) => InspectionHeaderPage(
                 vehicle: vehicle,
                 location: location,
-                clientName: 'Client Name', // Replace with actual client name
+                clientName: clientName,
                 phone: phone,
               ),
             ),
