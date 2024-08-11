@@ -1,4 +1,72 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'employee_login_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+
+class InspectionListPage extends StatefulWidget {
+
+  @override
+  _InspectionListPageState createState() => _InspectionListPageState();
+}
+
+class _InspectionListPageState extends State<InspectionListPage> {
+
+  void logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      if (context.mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage()),
+        );
+      }
+    } catch (e) {
+      // Handle sign-out error if any
+      print('Sign out error: $e');
+    }
+  }
+  final List<Map<String, String>> inspections = [
+    {
+      'vehicle': '424 Backhoe Loader',
+      'location': 'Lucknow',
+      'clientName': 'Aditya Avi',
+      'phone': '9336063710',
+      'image': 'assets/424_backhoe_loader.jpg'
+    },
+    {
+      'vehicle': '730 Articulated Trucks',
+      'location': 'Trichy',
+      'clientName': 'Yuva Yashvin',
+      'phone': '8778044994',
+      'image': 'assets/310_mini_excavator.jpeg'
+    },
+    {
+      'vehicle': 'CW34 Roller',
+      'location': 'Delhi',
+      'clientName': 'Yuvraj',
+      'phone': '9818378372',
+      'image': 'assets/cw34_roller.jpeg'
+    },
+    {
+      'vehicle': '836 Landfill Compactor',
+      'location': 'Bengaluru',
+      'clientName': 'Chinamy',
+      'phone': '9563148521',
+      'image': 'assets/836_landfill_compactor.jpeg'
+    },
+    {
+      'vehicle': '310 Mini Excavator',
+      'location': 'Chennai',
+      'clientName': 'Abiram',
+      'phone': '9564317975',
+      'image': 'assets/310_mini_excavator.jpeg'
+    },
+  ];
+
+  String searchQuery = "";
 import 'inspection_header_page.dart';
 
 class InspectionListPage extends StatelessWidget {
@@ -13,6 +81,11 @@ class InspectionListPage extends StatelessWidget {
           style: TextStyle(color: Colors.black), // Set the title color to black
         ),
         actions: [
+          TextButton(
+            onPressed: logout,
+            child: Text(
+              'Sign Out',
+              style: TextStyle(color: Colors.white),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(

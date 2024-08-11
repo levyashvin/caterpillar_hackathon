@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "60470006775",
+    "project_id": "cat-inspector-app",
+    "storage_bucket": "cat-inspector-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60470006775:android:e7383b3822a659785894f2",
+        "android_client_info": {
+          "package_name": "com.example.cat_inspector"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMTfrJ1LSX3kh5-CqgJt9LhpjzDlzbk7U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
