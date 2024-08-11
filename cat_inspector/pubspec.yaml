@@ -16,10 +16,10 @@ dependencies:
   speech_to_text: ^6.6.0
   string_scanner: ^1.2.0
   intl: ^0.17.0
-  location: ^4.2.0
+  location: ^4.4.0
   signature: ^4.0.0
   image_picker: ^0.8.4+4
-  google_ml_kit: ^0.6.0
+  
 
   test_api: ^0.7.2
 
@@ -51,8 +51,8 @@ flutter:
     - assets/truck_background.png
     - assets/caterpillar_logo.png
 #   - assets/caterpillar_logo.svg
-    - assets/424_backhoe_loader.jpg
-    - assets/370_articulated_trucks.jpeg
-    - assets/cw34_roller.jpeg
-    - assets/836_landfill_compactor.jpeg
-    - assets/310_mini_excavator.jpeg
+    - assets/424 Backhoe Loader.png
+    - assets/370 Articulated Truck.png
+    - assets/CW34 Roller.png
+    - assets/836 Landfill Compactor.png
+    - assets/310 Mini Excavator.png
