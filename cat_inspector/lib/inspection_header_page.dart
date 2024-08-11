@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:signature/signature.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class InspectionHeaderPage extends StatefulWidget {
   final String vehicle;
@@ -36,15 +37,22 @@ class _InspectionHeaderPageState extends State<InspectionHeaderPage> {
   final TextEditingController _customerIdController = TextEditingController();
   final SignatureController _signatureController =
       SignatureController(penStrokeWidth: 5, penColor: Colors.black);
+  final FlutterTts _flutterTts = FlutterTts();
 
   @override
   void initState() {
     super.initState();
     _autoFillFields();
+    _startVoiceGuide();
+  }
+
+  @override
+  void dispose() {
+    _flutterTts.stop();
+    super.dispose();
   }
 
   void _autoFillFields() {
-    // Auto-fill the inspector name, employee ID, and date/time fields
     _inspectorNameController.text =
         "John Doe"; // Example: Replace with actual inspector name
     _employeeIdController.text =
@@ -60,7 +68,6 @@ class _InspectionHeaderPageState extends State<InspectionHeaderPage> {
     final ImagePicker _picker = ImagePicker();
     final XFile? image = await _picker.pickImage(source: ImageSource.camera);
     if (image != null) {
-      // Process the image (dummy data used here)
       _serialNumberController.text =
           "735EJ73245"; // Replace with actual OCR result in the future
     }
@@ -94,6 +101,15 @@ class _InspectionHeaderPageState extends State<InspectionHeaderPage> {
         "${_locationData.latitude}, ${_locationData.longitude}";
   }
 
+  Future<void> _startVoiceGuide() async {
+    await _flutterTts
+        .speak("Fill in the details and sign at the end to begin inspection.");
+  }
+
+  void _clearSignature() {
+    _signatureController.clear();
+  }
+
   void _saveSignature() async {
     final signature = await _signatureController.toPngBytes();
     if (signature != null) {
@@ -102,8 +118,8 @@ class _InspectionHeaderPageState extends State<InspectionHeaderPage> {
     }
   }
 
-  void _clearSignature() {
-    _signatureController.clear();
+  void _stopVoiceGuide() async {
+    await _flutterTts.stop();
   }
 
   @override
@@ -176,6 +192,7 @@ class _InspectionHeaderPageState extends State<InspectionHeaderPage> {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
+                  _stopVoiceGuide();
                   // Proceed to the next step
                 },
                 style: ElevatedButton.styleFrom(
