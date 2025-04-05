@@ -78,7 +78,7 @@ flutter run
 
 ## Final Milestone
 
-We cleared three intense evaluation rounds and were honored to present our MVP at the final stage.  
+We cleared three intense evaluation rounds and made it to the final round.  
 Built in just 48 hours, this project represents our commitment to innovation, teamwork, and real-world impact.
 
 ---
