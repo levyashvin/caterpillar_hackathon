@@ -57,7 +57,6 @@ Sample Sections:
 ### Prerequisites
 - Flutter SDK: https://flutter.dev/docs/get-started/install
 - Android Studio or Xcode (for mobile builds)
-- C++ compiler + CMake
 
 ### Setup
 
